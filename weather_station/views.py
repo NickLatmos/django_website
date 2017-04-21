@@ -31,8 +31,8 @@ class Weather(APIView):
     # If the posted weather station's ID is not equal to anyone from the database then reject it.
     if serializer.is_valid():
       serializer.save()
-      return Response(serializer.data, status=status.HTTP_201_CREATED)
-    return Response(serializer.data, status=status.HTTP_400_BAD_REQUEST)
+      return Response(serializer.data, status=status.HTTP_201_CREATED) + str('\a')
+    return Response(serializer.data, status=status.HTTP_400_BAD_REQUEST) + str('\a')
 
 class WeatherToday(APIView):
   '''
