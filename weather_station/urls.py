@@ -4,6 +4,7 @@ from . import views
 urlpatterns = [
   
   # For post() method -- Weather measurements
+  # http://192.168.1.60:5000/weather_station/ the data (+ID) are in the payload
   url(r'^$', views.Weather.as_view()),     
   # For post() method -- Valve status -- Needs ID and valve_status in the payload
   url(r'^valve/$', views.Valve.as_view()),
