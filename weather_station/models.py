@@ -20,7 +20,7 @@ class Weather(models.Model):
   temperature = models.IntegerField()
   humidity = models.IntegerField()
   case_temperature = models.IntegerField()
-  pressure = models.BigAutoField()
+  pressure = models.BigIntegerField()
   weather = models.CharField(max_length=30)
   time = models.TimeField(auto_now_add=True, blank=True)
   date = models.DateField(auto_now_add=True, blank=True)
