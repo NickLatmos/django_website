@@ -6,6 +6,7 @@ from rest_framework import status
 from .models import Weather as WeatherModel, Valve as ValveModel
 from .serializer import WeatherSerializer
 import datetime
+import logging, json
 
 class Weather(APIView):
   '''
@@ -32,6 +33,8 @@ class Weather(APIView):
     if serializer.is_valid():
       serializer.save()
       return (Response('{Data successfully posted}', status=status.HTTP_201_CREATED))
+    logger = logging.getLogger('django_website.weather_station') 
+    logger.debug('Here is the post data:\n %s', json.dumps(request.POST, indent=4, sort_keys=True))
     return (Response('{Something went wrong}', status=status.HTTP_400_BAD_REQUEST))
 
 class WeatherToday(APIView):
