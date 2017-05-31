@@ -37,7 +37,7 @@ class Weather(APIView):
       return (Response('{Data successfully posted}', status=status.HTTP_201_CREATED))
     logger.debug("Hey there it works!!")
     logger.info("Hey there it works!!")
-    logerg.warn("Hey there it works!!")
+    logger.warn("Hey there it works!!")
     logger.error("Hey there it works!!")
     #logger.debug('Here is the post data:\n %s', json.dumps(request.POST, indent=4, sort_keys=True))
     return (Response('{Something went wrong}', status=status.HTTP_400_BAD_REQUEST))
