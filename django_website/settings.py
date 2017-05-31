@@ -65,7 +65,7 @@ LOGGING = {
             'level': 'DEBUG',
             'propagate': False,
         },
-        'MYAPP': {
+        'weather_station': {
             'handlers': ['console', 'logfile'],
             'level': 'DEBUG',
         },
