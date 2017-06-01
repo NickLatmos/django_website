@@ -42,7 +42,7 @@ class Weather(APIView):
     self.pretty_request(request, logger)
     return (Response('{Something went wrong}', status=status.HTTP_400_BAD_REQUEST))
   
-  def pretty_request(request, logger):
+  def pretty_request(self, request, logger):
     headers = ''
     for header, value in request.META.items():
         if not header.startswith('HTTP'):
