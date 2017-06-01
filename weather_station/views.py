@@ -43,27 +43,15 @@ class Weather(APIView):
     return (Response('{Something went wrong}', status=status.HTTP_400_BAD_REQUEST))
   
   def pretty_request(self, request, logger):
-    headers = ''
-    for header, value in request.META.items():
-        if not header.startswith('HTTP'):
-            continue
-        header = '-'.join([h.capitalize() for h in header[5:].lower().split('_')])
-        headers += '{}: {}\n'.format(header, value)
-
-    logger.warn(
-        '{method} HTTP/1.1\n'
-        'Content-Length: {content_length}\n'
-        'Content-Type: {content_type}\n'
-        '{headers}\n\n'
-        '{body}'
-    ).format(
-        method=request.method,
-        content_length=request.META['CONTENT_LENGTH'],
-        content_type=request.META['CONTENT_TYPE'],
-        headers=headers,
-        body=request.body,
-    )
-
+    content_length = request.META["CONTENT_LENGTH"] 
+    host = request.META["HTTP_HOST"]
+    content_type = request.META["CONTENT_TYPE"]
+    port = request.META["SERVER_PORT"]
+    logger.warn("CONTENT_LENGTH: %s", content_length)
+    logger.warn("HTTP_HOST: %s", host)
+    logger.warn("SERVER_PORT: %s", port)
+    logger.warn("CONTENT_TYPE: %s", content_type)
+     
 class WeatherToday(APIView):
   '''
   Returns the weather measurements taken today
