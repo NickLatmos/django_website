@@ -40,7 +40,7 @@ class Weather(APIView):
     self.pretty_request(request, logger)
     logger.warn('Here is the post data:\n %s', json.dumps(request.POST, indent=4, sort_keys=True))
     id = request.POST["ID"]
-    logger.warn("ID = %s", % id)
+    logger.warn("ID = %s", id)
     return (Response('{Something went wrong}', status=status.HTTP_400_BAD_REQUEST))
   
   def pretty_request(self, request, logger):
