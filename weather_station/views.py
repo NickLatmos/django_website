@@ -35,11 +35,11 @@ class Weather(APIView):
     if serializer.is_valid():
       serializer.save()
       logger.warn('Successfully ppsted data:\n %s', json.dumps(request.POST, indent=4, sort_keys=True))
-      pretty_request(request, logger)
+      self.pretty_request(request, logger)
       return (Response('{Data successfully posted}', status=status.HTTP_201_CREATED))
     logger.warn("Let's see the fault")
     logger.warn('Here is the post data:\n %s', json.dumps(request.POST, indent=4, sort_keys=True))
-    pretty_request(request, logger)
+    self.pretty_request(request, logger)
     return (Response('{Something went wrong}', status=status.HTTP_400_BAD_REQUEST))
   
   def pretty_request(request, logger):
