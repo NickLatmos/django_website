@@ -22,8 +22,5 @@ urlpatterns = [
   # url: /weather_station/XYZ/2017/04/06
   url(r'^(?P<weather_station_id>[\w]+)/(?P<year>[0-9]{4})/(?P<month>[0-9]{2})/(?P<day>[0-9]{2})/$', views.WeatherSpecificDate.as_view()),
   # url: /weather_station/XYZ/2017/04/06
-  url(r'^(?P<weather_station_id>[\w]+)/from/(?P<year_from>[0-9]{4})/(?P<month_from>[0-9]{2})/(?P<day_from>[0-9]{2})/ \
-      (?P<hour_from>[0-9]{2})/(?P<minute_from>[0-9]{2})/(?P<second_from>[0-9]{2})/ \
-      to/(?P<year_to>[0-9]{4})/(?P<month_to>[0-9]{2})/(?P<day_to>[0-9]{2})/ \
-      (?P<hour_to>[0-9]{2})/(?P<minute_to>[0-9]{2})/(?P<second_to>[0-9]{2})/$', views.WeatherDateTimeRange.as_view()),
+  url(r'^(?P<weather_station_id>[\w]+)/from/(?P<year_from>[0-9]{4})/(?P<month_from>[0-9]{2})/(?P<day_from>[0-9]{2})/(?P<hour_from>[0-9]{2})/(?P<minute_from>[0-9]{2})/(?P<second_from>[0-9]{2})/to/(?P<year_to>[0-9]{4})/(?P<month_to>[0-9]{2})/(?P<day_to>[0-9]{2})/(?P<hour_to>[0-9]{2})/(?P<minute_to>[0-9]{2})/(?P<second_to>[0-9]{2})/$', views.WeatherDateTimeRange.as_view()),
 ]
