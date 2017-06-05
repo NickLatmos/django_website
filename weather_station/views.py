@@ -14,7 +14,7 @@ class WeatherStation(APIView):
     # GET method -- Used for ID validation 
   def get(self, request, weather_station_id):
     try: 
-      weather = WeatherStationModel.objects.filter(ID=weather_station_id)
+      weather = WeatherStationModel.objects.filter(weather_station_id=weather_station_id)
       if not weather:
         raise Http404
       return Response(status=status.HTTP_200_OK)
