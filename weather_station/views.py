@@ -129,9 +129,9 @@ class WeatherDateTimeRange(APIView):
   def get(self, request, weather_station_id, year_from, month_from, day_from, hour_from, minute_from, second_from,
           year_to, month_to, day_to, hour_to, minute_to, second_to):
     dateObjectFrom = datetime.datetime(year=int(year_from), month=int(month_from), day=int(day_from))
-    timeObjectFrom = datetime.datetime(hour=int(hour_from), minute=int(minute_from), second=int(second_from))
+    timeObjectFrom = datetime.time(hour=int(hour_from), minute=int(minute_from), second=int(second_from))
     dateObjectTo = datetime.datetime(year=int(year_to), month=int(month_to), day=int(day_to))
-    timeObjectTo = datetime.datetime(hour=int(hour_to), minute=int(minute_to), second=int(second_to))
+    timeObjectTo = datetime.time(hour=int(hour_to), minute=int(minute_to), second=int(second_to))
     weather = WeatherModel.objects.filter(ID=weather_station_id)
     weather = weather.filter(date__gte=dateObjectFrom)
     weather = weather.filter(time__gte=timeObjectFrom)
