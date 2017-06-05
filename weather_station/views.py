@@ -3,13 +3,24 @@ from django.http import Http404, JsonResponse
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .models import Weather as WeatherModel, Valve as ValveModel
-from .serializer import WeatherSerializer
+from .models import Weather as WeatherModel, Valve as ValveModel, WeatherStation as WeatherStationModel
+from .serializer import WeatherSerializer, WeatherStationSerializer
 import datetime
 import logging, json
 
 logger = logging.getLogger(__name__)
 
+class WeatherStation(APIView):
+    # GET method -- Used for ID validation 
+  def get(self, request, weather_station_id):
+    try: 
+      weather = WeatherStationModel.objects.filter(ID=weather_station_id)
+      if not weather:
+        raise Http404
+      return Response(status=status.HTTP_200_OK)
+    except WeatherStationModel.DoesNotExist:
+      raise Http404
+      
 class Weather(APIView):
   '''
   Return all the weather measurements for the specified weather station
