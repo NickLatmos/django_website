@@ -12,7 +12,7 @@ urlpatterns = [
   # /weather_station/valve/<ID>
   url(r'^valve/(?P<weather_station_id>[\w]+)/$', views.Valve.as_view()),
   # The weather station ID can be any alphanumeric character
-  url(r'^validate/(?P<weather_station_id>[\w]+)/$', views.Weather.as_view()),
+  url(r'^validate/(?P<weather_station_id>[\w]+)/$', views.WeatherStation.as_view()),
   # url: /weather_station/today/<ID>
   url(r'^today/(?P<weather_station_id>[\w]+)/$', views.WeatherToday.as_view()),
   # url: /weather_station/XYZ/days/20
