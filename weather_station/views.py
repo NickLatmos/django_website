@@ -119,6 +119,29 @@ class WeatherSpecificDate(APIView):
     serializer = WeatherSerializer(weather, many=True)
     return Js(serializer.data)
 
+class WeatherDateTimeRange(APIView):
+  '''
+  Returns the measurements of the weather_station_id from a specific date
+  and time to a specific date and time.
+  url: http://127.0.0.1:8000/weather_station/<ID>/from/<year>/<month>/<day>/<hour>/<minute>/<seconds>
+  /to/<year>/<month>/<day>/<hour>/<minute>/<seconds>/
+  '''
+  def get(self, request, weather_station_id, year_from, month_from, day_from, hour_from, minute_from, second_from,
+          year_to, month_to, day_to, hour_to, minute_to, second_to):
+    dateObjectFrom = datetime.datetime(year=int(year_from), month=int(month_from), day=int(day_from))
+    timeObjectFrom = datetime.datetime(hour=int(hour_from), minute=int(minute_from), second=int(second_from))
+    dateObjectTo = datetime.datetime(year=int(year_to), month=int(month_to), day=int(day_to))
+    timeObjectTo = datetime.datetime(hour=int(hour_to), minute=int(minute_to), second=int(second_to))
+    weather = WeatherModel.objects.filter(ID=weather_station_id)
+    weather = weather.filter(date__gte=dateObjectFrom)
+    weather = weather.filter(time__gte=timeObjectFrom)
+    weather = weather.filter(date__lte=dateObjectTo)
+    weather = weather.filter(time__lte=timeObjectTo)
+    if not weather:
+      raise Http404
+    serializer = WeatherSerializer(weather, many=True)
+    return Response(serializer.data)
+
 class Valve(APIView):
   '''
   Android App posts ID and desired valve_status. The server saves the valve_status in the Valve database table
