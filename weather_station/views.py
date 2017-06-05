@@ -18,14 +18,15 @@ class Weather(APIView):
   POST url http://127.0.0.1:8000/weather_station/
   '''
 
-  # GET method To be deleted. 
+  # GET method -- Used for ID validation 
   def get(self, request, weather_station_id):
     try: 
       weather = WeatherModel.objects.filter(ID=weather_station_id)
       if not weather:
         raise Http404
-      serializer = WeatherSerializer(weather, many=True)          # When using filter() we must include many=True
-      return Response(serializer.data)
+      #serializer = WeatherSerializer(weather, many=True)          # When using filter() we must include many=True
+      #return Response(serializer.data)
+      return Response(status=status.HTTP_200_OK)
     except WeatherModel.DoesNotExist:
       raise Http404
 
