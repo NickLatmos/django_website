@@ -117,7 +117,7 @@ class WeatherSpecificDate(APIView):
     if not weather:
       raise Http404
     serializer = WeatherSerializer(weather, many=True)
-    return Js(serializer.data)
+    return Response(serializer.data)
 
 class WeatherDateTimeRange(APIView):
   '''
