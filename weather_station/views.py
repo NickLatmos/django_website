@@ -136,7 +136,7 @@ class WeatherDateTimeRange(APIView):
     weather = weather.filter(date__gte=dateObjectFrom)
     weather = weather.filter(time__gte=timeObjectFrom)
     weather = weather.filter(date__lte=dateObjectTo)
-    #weather = weather.filter(time__lte=timeObjectTo)
+    weather = weather.filter(time__lte=timeObjectTo)
     if not weather:
       raise Http404
     serializer = WeatherSerializer(weather, many=True)
