@@ -83,10 +83,11 @@ class WeatherLastMeasurement(APIView):
   url: http://127.0.0.1:8000/weather_station/last_measurement/<ID>/
   '''
   def get(self, request, weather_station_id):
-    weather = WeatherModel.objects.filter(ID=weather_station_id).order_by('-date','-time')[0]
-    if not weather:
+    weather = WeatherModel.objects.filter(ID=weather_station_id)
+    weather1 = weather.order_by('-date','-time')[0]
+    if not weather1:
       raise Http404
-    serializer = WeatherSerializer(weather, many=True)
+    serializer = WeatherSerializer(weather1, many=False)
     return Response(serializer.data)
 
 class WeatherSpecificMonth(APIView):
