@@ -15,8 +15,8 @@ urlpatterns = [
   url(r'^validate/(?P<weather_station_id>[\w]+)/$', views.WeatherStation.as_view()),
   # url: /weather_station/today/<ID>
   url(r'^today/(?P<weather_station_id>[\w]+)/$', views.WeatherToday.as_view()),
-  # url: /weather_station/XYZ/days/20
-  url(r'^(?P<weather_station_id>[\w]+)/days/(?P<days>[0-9]{1,3})/$', views.WeatherLastDays.as_view()),
+  # url: /weather_station/last_measurement/XYZ/
+  url(r'^last_measurement/(?P<weather_station_id>[\w]+)/$', views.WeatherLastMeasurement.as_view()),
   # url: /weather_station/XYZ/month/04
   url(r'^(?P<weather_station_id>[\w]+)/month/(?P<month>[0-9]{2})/$', views.WeatherSpecificMonth.as_view()),
   # url: /weather_station/XYZ/2017/04/06
