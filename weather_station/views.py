@@ -66,7 +66,7 @@ class Weather(APIView):
      
 class WeatherToday(APIView):
   '''
-  Returns the weather measurements taken today
+  Returns the last weather measurement for the specified weather station
   url: http://127.0.0.1:8000/weather_station/today/<ID>
   '''
   def get(self, request, weather_station_id):
@@ -77,16 +77,13 @@ class WeatherToday(APIView):
     serializer = WeatherSerializer(weather, many=True)
     return Response(serializer.data)
 
-class WeatherLastDays(APIView):
+class WeatherLastMeasurement(APIView):
   '''
   Returns the weather measurements in the last <days> days
-  url: http://127.0.0.1:8000/weather_station/<ID>/days/<days>
+  url: http://127.0.0.1:8000/weather_station/last_measurement/<ID>/
   '''
-  def get(self, request, weather_station_id, days):
-    date_threshold = datetime.date.today() - datetime.timedelta(days=int(days))
-    date = datetime.date.today()
-    weather = WeatherModel.objects.filter(ID=weather_station_id)
-    weather = weather.filter(date__gte=date_threshold)
+  def get(self, request, weather_station_id):
+    weather = WeatherModel.objects.filter(ID=weather_station_id).order_by('-date','-time')[0]
     if not weather:
       raise Http404
     serializer = WeatherSerializer(weather, many=True)
