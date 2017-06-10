@@ -170,7 +170,7 @@ class Valve(APIView):
       except:
         raise Http404
     except:
-      raise HTTP_400_BAD_REQUEST
+      raise Http404
     return Response(status=status.HTTP_200_OK)
 
 
