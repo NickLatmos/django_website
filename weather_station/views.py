@@ -99,11 +99,11 @@ class WeatherLastMeasurements(APIView):
     try:
       weather = WeatherModel.objects.filter(ID=weather_station_id)
       if int(interval) <= 20:
-        date_threshold = datetime.now() - timedelta(days=1)
+        date_threshold = datetime.datetime.now() - timedelta(days=1)
       elif int(interval) <= 40 and int(max_number) <= 30:
-        date_threshold = datetime.now() - timedelta(days=2)
+        date_threshold = datetime.datetime.now() - timedelta(days=2)
       else:
-        time_threshold = datetime.now() - timedelta(days=3)
+        time_threshold = datetime.datetime.now() - timedelta(days=3)
       weather = weather.objects.filter(date__gte=date_threshold)
       if not weather:
         raise Http404
