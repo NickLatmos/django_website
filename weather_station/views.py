@@ -103,7 +103,7 @@ class WeatherLastMeasurements(APIView):
       elif int(interval) <= 40 and int(max_number) <= 30:
         date_threshold = datetime.datetime.now() - datetime.timedelta(days=2)
       else:
-        time_threshold = datetime.datetime.now() - datetime.timedelta(days=3)
+        date_threshold = datetime.datetime.now() - datetime.timedelta(days=3)
       weather = weather.filter(date__gte=date_threshold)
       weather = weather.order_by('-date','-time')
       if not weather:
