@@ -90,18 +90,27 @@ class WeatherLastMeasurement(APIView):
     serializer = WeatherSerializer(weather1, many=False)
     return Response(serializer.data)
 
-class WeatherSpecificMonth(APIView):
+class WeatherLastMeasurements(APIView):
   '''
   Returns the weather measurements for the month <month> (in decimal represantation)
-  url: http://127.0.0.1:8000/weather_station/<ID>/month/<month>/
+  url: http://127.0.0.1:8000/weather_station/<ID>/last_measurements/<max_number>/interval/<interval>/
   '''
-  def get(self, request, weather_station_id, month):
-    weather = WeatherModel.objects.filter(ID=weather_station_id)
-    weather = weather.filter(date__month=month)
-    if not weather:
+  def get(self, request, weather_station_id, max_number, interval):
+    try:
+      weather = WeatherModel.objects.filter(ID=weather_station_id)
+      if interval <= 20
+        date_threshold = datetime.now() - timedelta(days=1)
+      elif interval <= 40 and max_number <= 30
+        date_threshold = datetime.now() - timedelta(days=2)
+      else 
+        time_threshold = datetime.now() - timedelta(days=3)
+      weather = weather.objects.filter(date__gte=date_threshold)
+      if not weather:
+        raise Http404
+      serializer = WeatherSerializer(weather, many=True)
+      return Response(serializer.data)
+    except WeatherModel.DoesNotExist:
       raise Http404
-    serializer = WeatherSerializer(weather, many=True)
-    return Response(serializer.data)
 
 class WeatherSpecificDate(APIView):
   '''
