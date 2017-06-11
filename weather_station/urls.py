@@ -18,7 +18,7 @@ urlpatterns = [
   # url: /weather_station/last_measurement/XYZ/
   url(r'^last_measurement/(?P<weather_station_id>[\w]+)/$', views.WeatherLastMeasurement.as_view()),
   # url: /weather_station/XYZ/month/04
-  url(r'^(?P<weather_station_id>[\w]+)/month/(?P<month>[0-9]{2})/$', views.WeatherSpecificMonth.as_view()),
+  url(r'^(?P<weather_station_id>[\w]+)/last_measurements/(?P<max_number>[0-9]{1,3})/interval/(?P<interval>[0-9]{1,3})/$', views.WeatherLastMeasurements.as_view()),
   # url: /weather_station/XYZ/2017/04/06
   url(r'^(?P<weather_station_id>[\w]+)/(?P<year>[0-9]{4})/(?P<month>[0-9]{2})/(?P<day>[0-9]{2})/$', views.WeatherSpecificDate.as_view()),
   # url: /weather_station/XYZ/2017/04/06
