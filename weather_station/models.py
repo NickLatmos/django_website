@@ -21,6 +21,7 @@ class Weather(models.Model):
   humidity = models.IntegerField()
   case_temperature = models.IntegerField()
   pressure = models.BigIntegerField()
+  battery = models.DecimalField(max_digits=4, decimal_places=2)
   weather = models.CharField(max_length=30)
   time = models.TimeField(auto_now_add=True, blank=True)
   date = models.DateField(auto_now_add=True, blank=True)
