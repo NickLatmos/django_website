@@ -121,9 +121,10 @@ class WeatherStationVoltage(APIView):
     weather = WeatherModel.objects.filter(ID=weather_station_id)
     weather1 = weather.order_by('-date','-time')[0]
     response = JsonResponse({'battery': weather1.battery})
+    return response
     if not weather1:
       raise Http404
-   return response
+   
 
 class WeatherDateTimeRange(APIView):
   '''
