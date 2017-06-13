@@ -113,19 +113,17 @@ class WeatherLastMeasurements(APIView):
     except WeatherModel.DoesNotExist:
       raise Http404
 
-class WeatherSpecificDate(APIView):
+class WeatherStationVoltage(APIView):
   '''
-  Returns the measurements of the weather_station_id for the date = YYYY-MM-DD
-  url: http://127.0.0.1:8000/weather_station/<ID>/<year>/<month>/<day>
+  Returns the latest measurement of the battery voltage for the specified weather station
   '''
-  def get(self, request, weather_station_id, year, month, day):
-    dateObject = datetime.datetime(year=int(year), month=int(month), day=int(day))
+  def get(self, request, weather_station_id):
     weather = WeatherModel.objects.filter(ID=weather_station_id)
-    weather = weather.filter(date=dateObject)
-    if not weather:
+    weather1 = weather.order_by('-date','-time')[0]
+    response = JsonResponse({'battery': weather1.battery})
+    if not weather1:
       raise Http404
-    serializer = WeatherSerializer(weather, many=True)
-    return Response(serializer.data)
+   return response
 
 class WeatherDateTimeRange(APIView):
   '''
