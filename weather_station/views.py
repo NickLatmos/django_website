@@ -193,6 +193,7 @@ class TimeView(APIView):
   '''
   def get(self, request):
     now = datetime.datetime.now()
+    now = now + timedelta(hours=3)
     responseTime = "TIME %02d:%02d:%02d" % (now.hour, now.minute, now.second)
     return HttpResponse(responseTime)
 
