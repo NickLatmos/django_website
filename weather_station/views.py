@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404
-from django.http import Http404, JsonResponse
+from django.http import Http404, JsonResponse, HttpResponse
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -187,7 +187,14 @@ class Valve(APIView):
       raise Http404
     return Response(status=status.HTTP_200_OK)
 
-
+class TimeView(APIView):
+  '''
+  Return current time
+  '''
+  def get(self, request):
+    now = datetime.datetime.now()
+    responseTime = "TIME %02d:%02d:%02d" % (now.hour, now.minute, now.second)
+    return HttpResponse(responseTime)
 
 
 
