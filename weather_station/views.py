@@ -145,6 +145,7 @@ class WeatherDateTimeRange(APIView):
     if timeObjectFrom > timeObjectTo:
       qs1 = weather.filter(time__gte=timeObjectFrom)
       qs2 = weather.filter(time__lte=timeObjectTo)
+      qs2.exclude(date=dateObjectFrom)
       weather = qs1 | qs2    # return the union
     else:
       weather = weather.filter(time__gte=timeObjectFrom, time__lte=timeObjectTo)
