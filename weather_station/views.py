@@ -105,7 +105,7 @@ class WeatherLastMeasurements(APIView):
       else:
         date_threshold = datetime.datetime.now() - datetime.timedelta(days=3)
       weather = weather.filter(date__gte=date_threshold)
-      weather = weather.order_by('-date','-time')
+      weather = weather.order_by('date','time')
       if not weather:
         raise Http404
       serializer = WeatherSerializer(weather, many=True)
