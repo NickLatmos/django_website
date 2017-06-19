@@ -148,7 +148,7 @@ class WeatherDateTimeRange(APIView):
       weather.union(weather,qs1)
     else:
       weather = weather.filter(time__gte=timeObjectFrom, time__lte=timeObjectTo)
-    if not qset:
+    if not weather:
       raise Http404
     serializer = WeatherSerializer(weather, many=True)
     return Response(serializer.data)
