@@ -143,14 +143,14 @@ class WeatherDateTimeRange(APIView):
     weather = weather.filter(date__gte=dateObjectFrom)
     weather = weather.filter(date__lte=dateObjectTo)
     if timeObjectFrom > timeObjectTo:
-      qs1 = weather.filter(time__gte=timeObjectFrom)
-      qs2 = weather.filter(time__lte=timeObjectTo)
-      qset.union(qs1,qs2)
+      weather = weather.filter(time__gte=timeObjectFrom)
+      qs1 = weather.filter(time__lte=timeObjectTo)
+      weather.union(weather,qs1)
     else:
-      qset = weather.filter(time__gte=timeObjectFrom, time__lte=timeObjectTo)
+      weather = weather.filter(time__gte=timeObjectFrom, time__lte=timeObjectTo)
     if not qset:
       raise Http404
-    serializer = WeatherSerializer(qset, many=True)
+    serializer = WeatherSerializer(weather, many=True)
     return Response(serializer.data)
 
 class Valve(APIView):
