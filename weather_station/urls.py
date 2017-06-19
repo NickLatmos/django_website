@@ -23,4 +23,5 @@ urlpatterns = [
   url(r'^(?P<weather_station_id>[\w]+)/battery_voltage/$', views.WeatherStationVoltage.as_view()),
   # url: /weather_station/XYZ/2017/04/06
   url(r'^(?P<weather_station_id>[\w]+)/fromdate/(?P<year_from>[0-9]{4})/(?P<month_from>[0-9]{2})/(?P<day_from>[0-9]{2})/todate/(?P<year_to>[0-9]{4})/(?P<month_to>[0-9]{2})/(?P<day_to>[0-9]{2})/fromtime/(?P<hour_from>[0-9]{2})/(?P<minute_from>[0-9]{2})/(?P<second_from>[0-9]{2})/totime/(?P<hour_to>[0-9]{2})/(?P<minute_to>[0-9]{2})/(?P<second_to>[0-9]{2})/$', views.WeatherDateTimeRange.as_view()),
+  url(r'^time/$', views.TimeView.as_view()),
 ]
