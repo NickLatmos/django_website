@@ -143,14 +143,9 @@ class WeatherDateTimeRange(APIView):
     # Find date range
     weather = weather.filter(date__gte=dateObjectFrom)
     weather = weather.filter(date__lte=dateObjectTo)
-    #if timeObjectFrom > timeObjectTo:
-      # Find time range
-      weather = weather.exclude(time__lt=timeObjectFrom, date=dateObjectFrom)
-      weather = weather.exclude(time__gt=timeObjectTo, date=dateObjectTo)
-      #qs2 = qs2.exclude(date=dateObjectFrom)
-      #weather = qs1 | weather | qs2    # return the union
-    #else:
-      #weather = weather.filter(time__gte=timeObjectFrom, time__lte=timeObjectTo)
+    # Find time range
+    weather = weather.exclude(time__lt=timeObjectFrom, date=dateObjectFrom)
+    weather = weather.exclude(time__gt=timeObjectTo, date=dateObjectTo)
     weather = weather.order_by('date','time')
     if not weather:
       raise Http404
