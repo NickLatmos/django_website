@@ -140,15 +140,17 @@ class WeatherDateTimeRange(APIView):
     dateObjectTo = datetime.datetime(year=int(year_to), month=int(month_to), day=int(day_to))
     timeObjectTo = datetime.time(hour=int(hour_to), minute=int(minute_to), second=int(second_to))
     weather = WeatherModel.objects.filter(ID=weather_station_id)
+    # Find date range
     weather = weather.filter(date__gte=dateObjectFrom)
     weather = weather.filter(date__lte=dateObjectTo)
-    if timeObjectFrom > timeObjectTo:
-      qs1 = weather.filter(time__gte=timeObjectFrom)
-      qs2 = weather.filter(time__lte=timeObjectTo)
-      qs2 = qs2.exclude(date=dateObjectFrom)
-      weather = qs1 | qs2    # return the union
-    else:
-      weather = weather.filter(time__gte=timeObjectFrom, time__lte=timeObjectTo)
+    #if timeObjectFrom > timeObjectTo:
+      # Find time range
+      weather = weather.exclude(time__lt=timeObjectFrom, date=dateObjectFrom)
+      weather = weather.exclude(time__gt=timeObjectTo, date=dateObjectTo)
+      #qs2 = qs2.exclude(date=dateObjectFrom)
+      #weather = qs1 | weather | qs2    # return the union
+    #else:
+      #weather = weather.filter(time__gte=timeObjectFrom, time__lte=timeObjectTo)
     weather = weather.order_by('date','time')
     if not weather:
       raise Http404
